@@ -123,3 +123,13 @@ flowchart LR
 * Callbacks, Futures...
 * More complex to understand 
 * In java, user Threads
+
+### Java Platform Threads
+
+* Java Threads are mapped to OS Threads
+* Java Threads are heavyweight
+* Java Threads are expensive to create
+* Java Threads are expensive to context switch
+* Java Threads are expensive to terminate
+* Java Threads are expensive to synchronize and communicate
+* Java Threads are expensive to manage
