@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>scalability-demonstration</module>
-        <module>virtual-threads-demonstrations</module>
+        <module>virtual-threads-demonstration</module>
     </modules>
 
     <properties>

@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>dev.da0hn.structured.concurrency.threads.virtual</groupId>
-    <artifactId>virtual-threads-demonstrations</artifactId>
+    <artifactId>virtual-threads-demonstration</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

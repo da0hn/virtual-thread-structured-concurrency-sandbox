@@ -3,7 +3,6 @@ package dev.da0hn.structured.concurrency.threads.virtual;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 public class MainJacket {
 
@@ -34,17 +33,8 @@ public class MainJacket {
   private static void handleUserRequest() {
     System.out.println("Starting thread " + Thread.currentThread());
 
-    sleep(ThreadLocalRandom.current().nextInt(10, 45));
+    Utils.sleep(ThreadLocalRandom.current().nextInt(10, 45));
     System.out.println("Ending thread " + Thread.currentThread());
-  }
-
-  private static void sleep(int timeoutInSeconds) {
-    try {
-      TimeUnit.SECONDS.sleep(timeoutInSeconds);
-    }
-    catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 
 }
