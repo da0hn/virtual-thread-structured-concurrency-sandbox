@@ -114,22 +114,84 @@ flowchart LR
 #### Synchronous Call
 
 * Sequential execution of code
-* Easy to understand 
+* Easy to understand
 * Easy to debug
 
 #### Asynchronous Call
 
 * Does not wait for call to complete
 * Callbacks, Futures...
-* More complex to understand 
+* More complex to understand
 * In java, user Threads
 
-### Java Platform Threads
+## Threads and Scalability
 
-* Java Threads are mapped to OS Threads
-* Java Threads are heavyweight
-* Java Threads are expensive to create
-* Java Threads are expensive to context switch
-* Java Threads are expensive to terminate
-* Java Threads are expensive to synchronize and communicate
-* Java Threads are expensive to manage
+* Default stack size 1M
+  * As number of users increase, memory usage increases
+* There is a max limit to the max threads
+  * Depends on VM or Machine Memory
+  * Much more socket connections can be supported
+  * This prevents optimum scalability
+* IO Bound Tasks
+  * Paralyzes the OS thread for a longer time than necessary
+
+## Scalability Solutions
+
+* `{Optimized Scalable Application}` + `{Vertial Scaling}` + `{Horizontal Scaling}`
+
+### Vertical Scaling
+
+* Increase resources
+* CPU, Memory, Disk Space, etc...
+* Limit to scaling
+* Increases cost
+* Cloud Environment
+
+### Horizontal Scaling
+
+* Increase number of Application (Instances) nodes
+* No limit
+* Costly
+
+![Horizontal Scaling Image](.github/images/horizontal-scaling.png)
+
+## Non Blocking IO
+
+* Pseudo Code For Blocking IO
+
+### Blocking IO program flux
+
+```java
+// Fetch some data from DB
+var data1 = fetchDataFromDB(dbUrl);
+
+// Fetch some data from Microservice
+var data2 = fetchDataFromService(serviceUrl);
+
+// Process all data
+var combinedData = processAndCombine(data1, data2);
+
+// Send data to user
+sendData(combinedData);
+```
+
+![Blocking IO Diagram](.github/images/blocking-io-diagram.png)
+
+### Non-Blocking IO program flux
+
+![Non-Blocking IO Diagram](.github/images/non-blocking-io-diagram.png)
+
+```java
+
+// Non Blocking: Fetch some data from DB
+return fetchDataFromDb(dbUrl, data1 -> {
+    // Non Blocking: Fetch some data from Microservice
+    return fetchDataFromService(serviceUrl, data2 -> {
+        // Process all data and send
+        var combinedData = processAndCombine(data1, data2);
+        return sendData(combinedData);
+    });
+});
+
+```
+
