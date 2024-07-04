@@ -195,3 +195,25 @@ return fetchDataFromDb(dbUrl, data1 -> {
 
 ```
 
+## Virtual Threads
+
+* Lightweight threads (Extends the Thread Class)
+  * Fast creation time
+  * Exhibits same behaviour as Platform Threads
+  * Scales to millions of instances
+
+### Advantages
+  * No need for Thread Pool
+  * Can block on IO with no scalability issues
+  * Optimal concurrency
+  * Code can still be sequential
+  * Existing code will benefit from using Virtual Thread
+  * Combine with Future's and CompletableFuture's 
+### Limitations
+  * Blocking with native frames on Stack (JNI)
+    * This is rare
+  * Control memory per stack
+    * Reduce ThreadLocal's usage
+    * No deep recursions
+
+
