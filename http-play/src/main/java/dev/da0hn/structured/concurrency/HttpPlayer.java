@@ -14,9 +14,9 @@ public class HttpPlayer {
     try (var executorService = Executors.newThreadPerTaskExecutor(vThreadFactory)) {
       executorService.submit(new UserRequestHandler());
 
-      IntStream.rangeClosed(0, NUMBER_OF_USERS).forEach(i -> {
-        executorService.submit(new UserRequestHandler());
-      });
+//      IntStream.rangeClosed(0, NUMBER_OF_USERS).forEach(i -> {
+//        executorService.submit(new UserRequestHandler());
+//      });
     }
     catch (Exception e) {
       throw new RuntimeException(e);
