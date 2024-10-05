@@ -47,9 +47,7 @@ public class LongRunningTask implements Callable<LongRunningTask.TaskResponse> {
       this.print("Task failed");
       throw new RuntimeException("Task " + this.name + " failed.");
     }
-    TimeUnit.SECONDS.sleep(this.time);
     this.print("Task ended");
-
     final var timeTaken = ChronoUnit.MILLIS.between(startTime, Instant.now());
     return new TaskResponse(this.name, this.output, timeTaken);
   }
