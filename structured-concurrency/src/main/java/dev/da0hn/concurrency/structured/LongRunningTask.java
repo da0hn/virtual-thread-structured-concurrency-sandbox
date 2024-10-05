@@ -56,6 +56,14 @@ public class LongRunningTask implements Callable<LongRunningTask.TaskResponse> {
     System.out.printf("> %s: %s%n", this.name, message);
   }
 
+  public String name() {
+    return name;
+  }
+
+  public long time() {
+    return time;
+  }
+
   public record TaskResponse(String name, String message, Long timeTaken) { }
 
 }
