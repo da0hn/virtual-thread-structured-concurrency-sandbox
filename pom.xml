@@ -13,6 +13,7 @@
         <module>virtual-threads-demonstration</module>
         <module>http-play</module>
         <module>structured-concurrency</module>
+        <module>scoped-values</module>
     </modules>
 
     <properties>
