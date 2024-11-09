@@ -3,6 +3,8 @@ package dev.da0hn.structured.concurrency.api.bestprice.bookstore;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.StructuredTaskScope;
@@ -21,10 +23,11 @@ public class BookRetrieverService {
     }
 
     public List<Book> getBookFromAllStores(final String bookName) {
+
         try (var scope = new StructuredTaskScope<Book>()) {
             List<StructuredTaskScope.Subtask<Book>> tasks = new ArrayList<>();
-            tasks.add(scope.fork(() -> this.getBook(this.bookStoreProperties.wonderApiUrl(), bookName)));
-            tasks.add(scope.fork(() -> this.getBook(this.bookStoreProperties.mascotApiUrl(), bookName)));
+            tasks.add(scope.fork(() -> this.getBook(this.bookStoreProperties.wonderApiUrl(), "wonder-api", bookName)));
+            tasks.add(scope.fork(() -> this.getBook(this.bookStoreProperties.mascotApiUrl(), "mascot-api", bookName)));
 
             scope.join();
 
@@ -43,11 +46,15 @@ public class BookRetrieverService {
         }
     }
 
-    private Book getBook(String url, String bookName) {
-        return restClient.get()
+    private Book getBook(String url, String bookStoreApi, String bookName) {
+        var initialTime = Instant.now();
+        final var books = restClient.get()
             .uri(STR."\{url}/bookstore/books", p -> p.queryParam("name", bookName).build())
             .retrieve()
             .body(Book.class);
+        var duration = ChronoUnit.MILLIS.between(initialTime, Instant.now());
+        BestPriceBookController.TIME_MAP.get().addTiming(bookStoreApi, duration);
+        return books;
     }
 
 }

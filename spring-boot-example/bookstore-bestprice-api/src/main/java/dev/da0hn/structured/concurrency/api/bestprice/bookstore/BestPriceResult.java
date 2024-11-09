@@ -4,6 +4,7 @@ import java.util.List;
 
 public record BestPriceResult(
     Book bookPriceDeal,
-    List<Book> bookPrices
+    List<Book> bookPrices,
+    RestCallStatistics restCallStatistics
 ) {
 }
