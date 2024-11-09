@@ -1,0 +1,8 @@
+book:
+  store:
+    name: Wonder Book Store
+server:
+  port: 8081
+management:
+  server:
+    port: 9001

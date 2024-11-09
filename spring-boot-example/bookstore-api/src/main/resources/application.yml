@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: bookstore-api
+  threads:
+    virtual:
+      enabled: true
+server:
+  tomcat:
+    max-connections: 50000
+logging:
+  level:
+    web: DEBUG

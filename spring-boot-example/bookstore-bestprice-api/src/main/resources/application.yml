@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: bookstore-bestprice-api
+  threads:
+    virtual:
+      enabled: true
+server:
+  tomcat:
+    max-connections: 50000
+logging:
+  level:
+    web: debug
+ws-client:
+  book-store:
+    wonder-api-url: http://localhost:8081
+    mascot-api-url: http://localhost:8082
